@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+
 			demo: [
 				{
 					title: "FIRST",
@@ -12,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			contacts: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,9 +39,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
-		}
-	};
-};
+			},
+			
+			buscarContactos: async () => {
+				try{
+					const response = await fetch ("https://playground.4geeks.com/contact/agendas/julia/contacts")
+					if (!response.ok) {
+						crearJulia()
+					}
+					const data = await response.json()
+					console.log(response)
+					console.log(data);
+					setStore({contacts : data.contacts})
+
+
+				} catch (error) {
+
+				}
+			},
+
+			crearJulia: async () => {
+			  try {
+				const response = await fetch("https://playground.4geeks.com/contact/agendas/julia"  , {method: "POST"})
+				console.log(response)
+				const data = await response.json()
+				console.log(data)
+			  } catch (error) {
+			
+			  }
+		},
+
+			
+	}}
+}
 
 export default getState;
