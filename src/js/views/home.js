@@ -6,9 +6,11 @@ import { Card } from "./card";
 
 export const Home = () => {
 	 const {store, actions} = useContext (Context)
-
+	 if (!store.contacts || store.contacts.length === 0) {
+		return <div className="text-center mt-5 mb-4"><p>No hay contactos disponibles</p></div>;
+	}
 		return(
-			<div className="text-center mt-5 ">
+			<div className="text-center mt-5 mb-4 ">
 			<h1>Contacts</h1>
 	 		{
 				store.contacts.map (contact => {
@@ -16,6 +18,7 @@ export const Home = () => {
 						
 						<div key={contact.id}>
 							<Card
+							  id={contact.id} // Pass the id prop
 							name = {contact.name}
 							email = {contact.email}
 							phone = {contact.phone}
