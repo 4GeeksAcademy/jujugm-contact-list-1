@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/julia/contacts")
 					if (!response.ok) {
-						getActions().crearJulia()
+						getActions().createJulia()
 					}
 					const data = await response.json()
 					console.log(response)
@@ -84,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			  },
 
-			crearJulia: async () => {
+			createJulia: async () => {
 				try {
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/julia", { method: "POST" })
 					console.log(response)
